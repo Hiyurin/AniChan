@@ -5,7 +5,7 @@ You can search anime, light novel, get user stats and more.
 
 ## Install
 **__Require__**: Discord.js v13 & nodejs 18 and higher
-- Clone Repo: ``git clone https://github.com/Hiyurin/AniChan.git``
+- Clone Repo: ``git clone -b dev https://github.com/Hiyurin/AniChan.git``
 - Install library: ``npm i``
 - Edit the variables in the .env file
 - Start the bot with the command: ``npm run start`` or ``node index.js``
