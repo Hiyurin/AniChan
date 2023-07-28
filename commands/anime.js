@@ -23,8 +23,6 @@ module.exports = {
               coverImage {
                 large
               }
-              episodes
-              genres
               averageScore
               meanScore
             }
@@ -47,8 +45,6 @@ module.exports = {
       const embed = new MessageEmbed()
         .setTitle(animeData.title.romaji)
         .setDescription(description)
-        .addField('Số tập', animeData.episodes || 'Không xác định', true)
-        .addField('Thể loại', animeData.genres?.join(', ') || 'Không có thông tin.', true) 
         .addField('Xếp hạng', `${animeData.averageScore}/100`, true)
         .addField('Đánh giá', `${animeData.meanScore ? animeData.meanScore + '/100' : 'Không có'}`, true)
         .setImage(animeData.coverImage.large)
