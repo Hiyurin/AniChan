@@ -48,7 +48,7 @@ client.login(token).then(() => {
     .then(() => console.log('Đã đăng ký các lệnh gạch chéo thành công!'))
     .catch(error => console.error('Đã xảy ra lỗi khi đăng ký các lệnh gạch chéo:', error));
 });
-
+require('./status');
 client.on('guildCreate', async (guild) => {
   try {
     console.log(`Đã tham gia máy chủ: ${guild.name} (ID: ${guild.id}).`);
