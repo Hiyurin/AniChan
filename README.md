@@ -15,7 +15,8 @@ You can search anime, light novel, get user stats and more.
 - Search for and displaying info about anime, light novels, and trending anime from AniList
 - Search for the names of anime with the appearance of a certain characters
 - Show AniList user stats
-- Show trending anime 
+- Show trending anime
+- Get information of a studio and staff
 
 ## Commands
 - ``/user``: Get AniList user stats
@@ -23,6 +24,7 @@ You can search anime, light novel, get user stats and more.
 - ``/anime``: Searching anime
 - ``/find``: Search for the names of anime with the appearance of a certain character
 - ``/trending``: Show trending anime
-
+- ``/studio``: Get information of a studio
+- ``/staff``: Get basic information of staff
 ## Issues 
-Report [here](https://github.com/Hiyurin/AniChan/issues)
+Report [here](https://github.com/Hiyurin/AniChan/issues) or [Join Discord Server](https://discord.gg/wvsC4BZhdK)
