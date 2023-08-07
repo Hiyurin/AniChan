@@ -28,3 +28,22 @@ You can search anime, light novel, get user stats and more.
 - ``/staff``: Get basic information of staff
 ## Issues 
 Report [here](https://github.com/Hiyurin/AniChan/issues) or [Join Discord Server](https://discord.gg/wvsC4BZhdK)
+
+# Attribution
+
+✨ [AniList](https://anilist.co) & [AniChart](https://anichart.net)
+
+✨ [GraphQL](https://graphql.org)
+
+✨ [Discord.js](https://discord.js.org) Module
+
+✨ [Axios](https://axios-http.com) Module 
+
+✨ [Dotenv](https://dotenv.org) Module 
+
+## License
+AniChan is an open source project under the [MIT License](https://en.wikipedia.org/wiki/MIT_License)  that allows you to modify the code used to
+- [x] Commercial use
+- [x] Revision
+- [x] Allotment
+- [x] Personal use
