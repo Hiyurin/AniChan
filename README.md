@@ -10,7 +10,7 @@ You can search anime, light novel, get user stats and more.
 - Edit the variables in the .env file
 - Start the bot with the command: ``npm run start`` or ``node index.js``
 
-### Features
+## Features
 
 - Search for and displaying info about anime, light novels, and trending anime from AniList
 - Search for the names of anime with the appearance of a certain characters
