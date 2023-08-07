@@ -47,7 +47,7 @@ module.exports = {
           false
         );
 
-     //   embed.setImage();
+        //   embed.setImage();
       });
 
       interaction.reply({ embeds: [embed] });
