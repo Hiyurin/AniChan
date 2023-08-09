@@ -51,7 +51,7 @@ module.exports = {
         .setDescription(user.about || 'Không có thông tin.')
         .setThumbnail(user.avatar?.large || '')
         .addField('Số lượng anime đã xem', `${user.statistics.anime?.count || 0} bộ`, true)
-        .addField('Thời gian đã xem' , `${user.statistics.anime?.minutesWatched || 0} phút`, true)
+        .addField('Thời gian đã xem', `${user.statistics.anime?.minutesWatched || 0} phút`, true)
         .addField(' Số bộ manga đã đọc', `${user.statistics.manga?.count || 0} chương`, true)
         .addField(' Số chương manga đã đọc', `${user.statistics.manga?.chaptersRead || 0} chương`, true)
         .setTimestamp();

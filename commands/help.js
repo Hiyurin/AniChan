@@ -11,7 +11,7 @@ module.exports = {
       const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
       const embed = new MessageEmbed()
         .setTitle('Danh sách các lệnh')
-        .setDescription('Dưới đây là danh sách các lệnh có sẵn và cách sử dụng của chúng:')
+        .setDescription('Dưới đây là danh sách các lệnh có sẵn:')
         .setTimestamp();
 
       for (const file of commandFiles) {
