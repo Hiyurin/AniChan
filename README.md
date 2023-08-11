@@ -20,7 +20,7 @@ You can search anime, light novel, get user stats and more.
 
 ## Commands
 - ``/user``: Get AniList user stats
-- ``/lightnovel``: Searching light novel
+- ``/manga``: Searching manga
 - ``/anime``: Searching anime
 - ``/find``: Search for the names of anime with the appearance of a certain character
 - ``/trending``: Show trending anime
