@@ -4,9 +4,9 @@ const axios = require('axios');
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('lightnovel')
-    .setDescription('Tìm kiếm thông tin về một bộ light novel cụ thể.')
-    .addStringOption(option => option.setName('name').setDescription('Tên của light novel cần tìm').setRequired(true)),
+    .setName('manga')
+    .setDescription('Tìm kiếm thông tin về một bộ manga.')
+    .addStringOption(option => option.setName('name').setDescription('Tên manga cần tìm').setRequired(true)),
   async execute(interaction) {
     const lnName = interaction.options.getString('name');
 
@@ -36,11 +36,11 @@ module.exports = {
       const lnData = response.data.data.Media;
 
       if (!lnData) {
-        console.log(`Không tìm thấy light novel: ${lnName}`);
-        return interaction.reply(`Không tìm thấy light novel: **${lnName}**`);
+        console.log(`Không tìm thấy manga: ${lnName}`);
+        return interaction.reply(`Không tìm thấy manga: **${lnName}**`);
       }
 
-      console.log(`Thông tin light novel: ${JSON.stringify(lnData)}`);
+      console.log(`Thông tin về manga: ${JSON.stringify(lnData)}`);
 
       const description = lnData.description ? lnData.description.slice(0, 500) + '...' : 'Không có thông tin.';
 
@@ -56,8 +56,8 @@ module.exports = {
 
       interaction.reply({ embeds: [embed] });
     } catch (error) {
-      console.error('Lỗi khi tìm kiếm light novel:', error);
-      interaction.reply('Đã xảy ra lỗi khi tìm kiếm light novel.');
+      console.error('Lỗi khi tìm kiếm manga:', error);
+      interaction.reply('Đã xảy ra lỗi khi tìm kiếm manga.');
     }
   },
 };
