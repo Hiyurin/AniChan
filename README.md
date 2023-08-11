@@ -43,7 +43,8 @@ Report [here](https://github.com/Hiyurin/AniChan/issues) or [Join Discord Server
 
 ## License
 AniChan is an open source project under the [MIT License](https://en.wikipedia.org/wiki/MIT_License)  that allows you to modify the code used to
-- [x] Commercial use
 - [x] Revision
 - [x] Allotment
 - [x] Personal use
+
+In addition, you must also comply with the [terms of service of the AniList API](https://anilist.gitbook.io/anilist-apiv2-docs/overview/overview)
