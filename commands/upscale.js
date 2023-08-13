@@ -7,7 +7,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName('upscale')
     .setDescription('Tăng chất lượng hình ảnh bằng waifu2x')
-    .addStringOption(option => option.setName('image').setDescription('Liên kết đến hình ảnh cần upscale').setRequired(true)),
+    .addStringOption(option => option.setName('image').setDescription('Liên kết đến hình ảnh cần tăng chất lượng.').setRequired(true)),
   async execute(interaction) {
     const imageUrl = interaction.options.getString('image');
 
