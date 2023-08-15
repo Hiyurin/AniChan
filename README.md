@@ -23,6 +23,7 @@ You can search anime, light novel, get user stats and more.
 - ``/manga``: Searching manga
 - ``/anime``: Searching anime
 - ``/find``: Search for the names of anime with the appearance of a certain character
+- ``/character``: Get information of anime character.
 - ``/trending``: Show trending anime
 - ``/studio``: Get information of a studio
 - ``/staff``: Get basic information of staff
