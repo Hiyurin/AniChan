@@ -16,6 +16,7 @@ You can search anime, light novel, get user stats and more.
 - Search for the names of anime with the appearance of a certain characters
 - Show AniList user stats
 - Show trending anime
+- Get information of anime character
 - Get information of a studio and staff
 
 ## Commands
@@ -23,7 +24,7 @@ You can search anime, light novel, get user stats and more.
 - ``/manga``: Searching manga
 - ``/anime``: Searching anime
 - ``/find``: Search for the names of anime with the appearance of a certain character
-- ``/character``: Get information of anime character.
+- ``/character``: Get information of anime character
 - ``/trending``: Show trending anime
 - ``/studio``: Get information of a studio
 - ``/staff``: Get basic information of staff
