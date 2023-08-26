@@ -53,22 +53,22 @@ module.exports = {
         .setColor('#C6FFFF')
         .addFields(
           {
-            name: 'Số lượng anime đã xem',
-            value: `${userData.statistics.anime.count} bộ.`,
+            name: 'Đã xem',
+            value: `${userData.statistics.anime.count} bộ anime.`,
             inline: true,
           },
           {
-            name: 'Thời gian anime đã xem',
+            name: 'Đã xem',
             value: `${userData.statistics.anime.minutesWatched} phút.`,
             inline: true,
           },
           {
-            name: 'Số lượng manga đã đọc',
-            value: `${userData.statistics.manga.count} bộ.`,
+            name: 'Đã xem',
+            value: `${userData.statistics.manga.count} bộ manga.`,
             inline: true,
           },
           {
-            name: 'Số lượng chương manga đã đọc',
+            name: 'Đã đọc',
             value: `${userData.statistics.manga.chaptersRead} chương.`,
             inline: true,
           }
