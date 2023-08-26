@@ -5,7 +5,7 @@ const axios = require('axios');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('user')
-    .setDescription('Lấy thông tin cá nhân của người dùng trên AniList.')
+    .setDescription('Hiển thị thông tin tổng quan về người dùng trên AniList.')
     .addStringOption(option => option.setName('username').setDescription('Tên người dùng trên AniList').setRequired(true)),
   async execute(interaction) {
     const username = interaction.options.getString('username');
