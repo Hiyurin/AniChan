@@ -23,8 +23,29 @@ module.exports = {
               coverImage {
                 large
               }
+              format
+              episodes
+              status
+              startDate {
+                year
+                month
+                day
+              }
+              endDate {
+                year
+                month
+                day
+              }
+              season
               averageScore
               meanScore
+              studios(isMain: true) {
+                edges {
+                  node {
+                    name
+                  }
+                }
+              }
             }
           }
         `,
@@ -40,13 +61,47 @@ module.exports = {
 
       console.log(`Thông tin anime: ${JSON.stringify(animeData)}`);
 
-      const description = animeData.description ? animeData.description.slice(0, 500) + '...' : 'Không có thông tin.';
+      let description = animeData.description;
+      if (description && description.length > 400) {
+        description = description.slice(0, 400) + '...';
+      }
 
       const embed = new MessageEmbed()
         .setTitle(animeData.title.romaji)
         .setDescription(description)
-        .addField('Xếp hạng', `${animeData.averageScore}/100`, true)
-        .addField('Đánh giá', `${animeData.meanScore ? animeData.meanScore + '/100' : 'Không có'}`, true)
+        .setColor('#66FFFF')
+        .addFields(
+          {
+            name: 'Số tập',
+            value: `${animeData.episodes || 'N/A'}`,
+            inline: true,
+          },
+          {
+            name: 'Trạng thái',
+            value: `${animeData.status}`,
+            inline: true,
+          },
+          {
+            name: 'Đánh giá',
+            value: `${animeData.averageScore}/100`,
+            inline: true,
+          },
+          {
+            name: 'Xếp hạng',
+            value: `${animeData.meanScore}/100`,
+            inline: true,
+          },
+          {
+            name: 'Mùa',
+            value: `${animeData.season}`,
+            inline: true,
+          },
+          {
+            name: 'Studio',
+            value: `${animeData.studios.edges.map(edge => edge.node.name).join(', ')}`,
+            inline: true,
+          }
+        )
         .setImage(animeData.coverImage.large)
         .setTimestamp();
 

@@ -1,11 +1,11 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const axios = require('axios');
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('character')
-    .setDescription('Lấy thông tin của một nhân vật cụ thể.')
+    .setName('characters')
+    .setDescription('Lấy thông tin về một nhân vật cụ thể.')
     .addStringOption(option => option.setName('name').setDescription('Tên của nhân vật cần tìm').setRequired(true)),
   async execute(interaction) {
     const characterName = interaction.options.getString('name');
@@ -18,12 +18,11 @@ module.exports = {
             siteUrl
             name {
               full
-              native
             }
             image {
               large
             }
-            description(asHtml: false)
+            description
             media {
               nodes {
                 title {
@@ -49,17 +48,16 @@ module.exports = {
 
       console.log(`Thông tin nhân vật: ${JSON.stringify(characterData)}`);
 
-      const embed = new MessageEmbed()
-        .setTitle(`Thông tin của nhân vật: ${characterData.name.full}`)
-        .setURL(characterData.siteUrl)
-        .setDescription(characterData.description || 'Không có thông tin mô tả.')
-        .setThumbnail(characterData.image.large)
-        .setTimestamp();
+      let description = characterData.description || 'Không có mô tả.';
 
-      if (characterData.media.nodes.length > 0) {
-        const mediaList = characterData.media.nodes.map(node => node.title.romaji).join(', ');
-        embed.addField('Các bộ anime liên quan', mediaList);
-      }
+      const embed = new MessageEmbed()
+        .setTitle(characterData.name.full)
+        .setURL(characterData.siteUrl)
+        .setDescription(characterData.description)
+        .addField('Các tác phẩm tham gia', characterData.media.nodes.map(node => node.title.romaji).join(', ') || 'Không có tác phẩm nào.')
+        .setImage(characterData.image.large)
+        .setColor('#C6FFFF')
+        .setTimestamp();
 
       interaction.reply({ embeds: [embed] });
     } catch (error) {
