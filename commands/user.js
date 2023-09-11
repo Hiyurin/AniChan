@@ -17,6 +17,7 @@ module.exports = {
             id
             name
             about
+            siteUrl
             avatar {
               large
             }
@@ -50,6 +51,7 @@ module.exports = {
 
       const embed = new MessageEmbed()
         .setTitle(userData.name)
+        .setURL(userData.siteUrl)
         .setColor('#C6FFFF')
         .addFields(
           {
