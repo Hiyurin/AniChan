@@ -4,7 +4,7 @@ AniChan is a bot for browsing AniList from within Discord using JavaScript.
 You can search anime, light novel, get user stats and more.
 
 ## Install
-**__Require__**: Discord.js v13 & nodejs 18 and higher
+**__Require__**: Discord.js v13 & nodejs ≥ 16
 - Clone Repo: ``git clone https://github.com/Hiyurin/AniChan.git``
 - Install library: ``npm i``
 - Edit the variables in the .env file
