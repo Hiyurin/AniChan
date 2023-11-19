@@ -13,14 +13,17 @@ const commands = new Collection();
 
 const token = process.env.BOT_TOKEN;
 
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  commands.set(command.data.name, command);
+const commandFolders = fs.readdirSync('./commands');
+for (const folder of commandFolders) {
+  const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
+  for (const file of commandFiles) {
+    const command = require(`./commands/${folder}/${file}`);
+    commands.set(command.data.name, command);
+  }
 }
 
 client.once('ready', () => {
-  console.log('Bot đã sẵn sàng!');
+  console.log(`${client.user.tag} sẵn sàng!`);
 });
 
 client.on('interactionCreate', async (interaction) => {
@@ -45,8 +48,8 @@ client.login(token).then(() => {
   const rest = new REST({ version: '9' }).setToken(token);
 
   rest.put(Routes.applicationCommands(client.user.id), { body: commandsArray })
-    .then(() => console.log('Đã đăng ký các lệnh gạch chéo thành công!'))
-    .catch(error => console.error('Đã xảy ra lỗi khi đăng ký các lệnh gạch chéo:', error));
+    .then(() => console.log('Đã đăng ký lệnh thành công!'))
+    .catch(error => console.error('Đã xảy ra lỗi khi đăng ký:', error));
 });
 require('./status');
 client.on('guildCreate', async (guild) => {
@@ -58,8 +61,8 @@ client.on('guildCreate', async (guild) => {
 
     await rest.put(Routes.applicationGuildCommands(client.user.id, guild.id), { body: commandsArray });
 
-    console.log(`Đã đăng ký các lệnh gạch chéo cho máy chủ: ${guild.name} (ID: ${guild.id})`);
+    console.log(`Đã đăng ký lệnh cho máy chủ: ${guild.name} (ID: ${guild.id})`);
   } catch (error) {
-    console.error(`Đã xảy ra lỗi khi đăng ký các lệnh gạch chéo cho máy chủ: ${guild.name} (ID: ${guild.id})`, error);
+    console.error(`Đã xảy ra lỗi khi đăng ký lệnh cho máy chủ: ${guild.name} (ID: ${guild.id})`, error);
   }
 });

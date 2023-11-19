@@ -16,6 +16,7 @@ module.exports = {
           query ($name: String) {
             Media (search: $name, type: MANGA) {
               id
+              siteUrl
               title {
                 romaji
               }
@@ -27,6 +28,13 @@ module.exports = {
               genres
               averageScore
               meanScore
+              studios(isMain: true) {
+                edges {
+                  node {
+                    name
+                  }
+                }
+              }
             }
           }
         `,
@@ -46,11 +54,30 @@ module.exports = {
 
       const embed = new MessageEmbed()
         .setTitle(lnData.title.romaji)
+        .setURL(lnData.siteUrl)
         .setDescription(description)
-        .addField('Số chương', lnData.chapters ? ln.chapters : 'Không xác định', true)
-        .addField('Thể loại', lnData.genres.join(', '), true)
-        .addField('Xếp hạng', `${lnData.averageScore}/100`, true)
-        .addField('Đánh giá', `${lnData.meanScore ? lnData.meanScore + '/100' : 'Không có'}`, true)
+        .addFields(
+          {
+             name: 'Số chương', 
+             value: lnData.chapters ? ln.chapters : 'Không xác định', 
+             inline: true 
+          },
+          {
+             name: 'Thể loại', 
+             value: lnData.genres.join(', '), 
+             inline: true 
+          },
+          {
+             name: 'Xếp hạng',
+             value: `${lnData.averageScore}/100`, 
+             inline: true 
+          },
+          {
+             name: 'Đánh giá', 
+             value: `${lnData.meanScore ? lnData.meanScore + '/100' : 'Không có'}`, 
+             inline: true 
+          },
+        )
         .setImage(lnData.coverImage.large)
         .setTimestamp();
 

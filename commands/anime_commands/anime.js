@@ -16,6 +16,7 @@ module.exports = {
           query ($name: String) {
             Media (search: $name, type: ANIME) {
               id
+              siteUrl
               title {
                 romaji
               }
@@ -68,6 +69,7 @@ module.exports = {
 
       const embed = new MessageEmbed()
         .setTitle(animeData.title.romaji)
+        .setURL(animeData.siteUrl)
         .setDescription(description)
         .setColor('#66FFFF')
         .addFields(
@@ -93,7 +95,7 @@ module.exports = {
           },
           {
             name: 'Mùa',
-            value: `${animeData.season}`,
+            value: `${animeData.season} - ${animeData.startDate.year}`,
             inline: true,
           },
           {
