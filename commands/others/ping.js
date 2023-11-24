@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('ping')
-        .setDescription('Get bot ping'),
+        .setDescription('Bot ping'),
     async execute(interaction) {
         if (interaction.replied || interaction.deferred) {
             return;

@@ -5,15 +5,15 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('weather')
-        .setDescription('Checks a weather forecast')
-        .addStringOption(option => option.setName('city').setDescription('The city to check the weather for').setRequired(true)),
+        .setDescription('Kiểm tra dự báo thời tiết cho một địa điểm nhất định')
+        .addStringOption(option => option.setName("city").setDescription("The city you want to check the weather for").setRequired(true)),
 
     async execute(interaction) {
         const city = interaction.options.getString('city');
 
         weather.find({ search: city, degreeType: 'C' }, function (error, result) {
             if (error) return interaction.reply(error);
-            if (result === undefined || result.length === 0) return interaction.reply('Unknown city. Please try again');
+            if (result === undefined || result.length === 0) return interaction.reply('Không tìm thấy thành phố đã nhập. Vui lòng thử lại');
 
             const current = result[0].current;
             const location = result[0].location;
@@ -25,43 +25,42 @@ module.exports = {
                 .setTimestamp()
                 .addFields(
                     {
-                        name: 'Longitude',
+                        name: 'Kinh độ',
                         value: location.long,
                         inline: true,
                     },
+                    { 
+                        name: 'Vĩ độ', 
+                        value: location.lat, 
+                        inline: true },
                     {
-                        name: 'Feels Like',
-                        value: `${current.feelslike}° Degrees`,
+                        name: 'Đơn vị đo',
+                        value: `°${location.degreetype}`,
                         inline: true,
                     },
                     {
-                        name: 'Degree Type',
-                        value: location.degreetype,
+                        name: 'Nhiệt độ đo được',
+                        value: `${current.temperature}°${location.degreetype}`,
                         inline: true,
                     },
                     {
-                        name: 'Winds',
-                        value: current.winddisplay,
+                        name: 'Nhiệt độ cảm nhận',
+                        value: `${current.feelslike}°${location.degreetype}`,
                         inline: true,
                     },
                     {
-                        name: 'Humidity',
+                        name: 'Gió',
+                        value: `${current.winddisplay}`,
+                        inline: true,
+                    },
+                    {
+                        name: 'Độ ẩm',
                         value: `${current.humidity}%`,
                         inline: true,
                     },
                     {
-                        name: 'Timezone',
-                        value: `GMT ${location.timezone}`,
-                        inline: true,
-                    },
-                    {
-                        name: 'Temperature',
-                        value: `${current.temperature}° Degrees`,
-                        inline: true,
-                    },
-                    {
-                        name: 'Observation Time',
-                        value: current.observationtime,
+                        name: 'Cập nhật lúc',
+                        value: `${current.observationtime}, GMT ${location.timezone}`,
                         inline: true,
                     }
                 )

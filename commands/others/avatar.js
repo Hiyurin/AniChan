@@ -4,10 +4,10 @@ const { MessageEmbed } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('avatar')
-        .setDescription("Get user avatar")
+        .setDescription("Lấy avatar của người dùng")
         .addUserOption(option =>
             option.setName('user')
-                .setDescription('User to get the avatar from')
+                .setDescription('Người dùng cần lấy avatar:')
                 .setRequired(true)),
     async execute(interaction) {
         const user = interaction.options.getUser('user');
