@@ -2,8 +2,6 @@ const { Client, Intents, Collection } = require('discord.js');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 const fs = require('fs');
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const axios = require('axios');
 const dotenv = require('dotenv');
 
 dotenv.config();
@@ -29,7 +27,7 @@ client.once('ready', () => {
 client.on('interactionCreate', async (interaction) => {
   if (!interaction.isCommand()) return;
 
-  const { commandName, options } = interaction;
+  const { commandName } = interaction;
 
   const command = commands.get(commandName);
   if (!command) return;
@@ -43,7 +41,7 @@ client.on('interactionCreate', async (interaction) => {
 });
 
 client.login(token).then(() => {
-  console.log('Đang đăng ký các lệnh gạch chéo...');
+  console.log('Đang đăng ký lệnh...');
   const commandsArray = commands.map(command => command.data.toJSON());
   const rest = new REST({ version: '9' }).setToken(token);
 
