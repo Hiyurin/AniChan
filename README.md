@@ -21,7 +21,7 @@ AniChan is a bot for browsing AniList from within Discord using JavaScript. You 
 - Get information about a studio and staff
 
 ## Commands
-
+### Anime Commands
 - `/user`: Get AniList user stats
 - `/manga`: Search for manga
 - `/anime`: Search for anime
@@ -30,6 +30,14 @@ AniChan is a bot for browsing AniList from within Discord using JavaScript. You 
 - `/trending`: Show trending anime
 - `/studio`: Get information about a studio
 - `/staff`: Get basic information about staff
+
+### Honkai StarRail Commands
+- `/hsrcharacters`: Get Honkai Star Rail character list.
+### Other Commands
+- `/ping`: Get bot ping.
+- `avatar`: Get user avatar.
+- `ascii`: Convert text to AscII code.
+
 
 ## Issues 
 
@@ -46,6 +54,8 @@ Report [here](https://github.com/Hiyurin/AniChan/issues) or [join the Discord se
 ✨ [Axios](https://axios-http.com) module 
 
 ✨ [Dotenv](https://dotenv.org) module 
+
+✨ [Enka.network](https://enka.network/) & [StarRail.js](https://starrail.vercel.app/) module
 
 ## License
 
