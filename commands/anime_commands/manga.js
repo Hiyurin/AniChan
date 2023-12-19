@@ -8,7 +8,7 @@ module.exports = {
     .setDescription('Tìm kiếm thông tin về một bộ manga.')
     .addStringOption(option => option.setName('name').setDescription('Tên manga cần tìm').setRequired(true)),
   async execute(interaction) {
-    const lnName = interaction.options.getString('name');
+    const MangaName = interaction.options.getString('name');
 
     try {
       const response = await axios.post('https://graphql.anilist.co', {
@@ -35,50 +35,59 @@ module.exports = {
                   }
                 }
               }
+              genres
             }
           }
         `,
-        variables: { name: lnName },
+        variables: { name: MangaName },
       });
 
-      const lnData = response.data.data.Media;
+      const MangaData = response.data.data.Media;
 
-      if (!lnData) {
-        console.log(`Không tìm thấy manga: ${lnName}`);
-        return interaction.reply(`Không tìm thấy manga: **${lnName}**`);
+      if (!MangaData) {
+        //console.log(`Không tìm thấy manga: ${MangaName}`);
+        return interaction.reply(`Không tìm thấy manga: **${MangaName}**`);
       }
 
-      console.log(`Thông tin về manga: ${JSON.stringify(lnData)}`);
+      //console.log(`Thông tin về manga: ${JSON.stringify(MangaData)}`);
 
-      const description = lnData.description ? lnData.description.slice(0, 500) + '...' : 'Không có thông tin.';
+      // Check if the manga is ecchi or hentai
+
+      const MangaGenre = MangaData.genres;
+      if (MangaGenre.includes('Ecchi') || MangaGenre.includes('Hentai')) {
+       // //console.log(`Blocked Result: ${MangaName}`); 
+       return interaction.reply(`**AniChan đã chặn kết quả tìm kiếm manga: ${MangaName}**\n__Lý do:__ Để bảo vệ máy chủ của bạn khỏi điều khoản dịch vụ của Discord, AniChan chặn các kết quả tìm kiếm chứa nội dung người lớn.`);
+      }
+
+      const description = MangaData.description ? MangaData.description.slice(0, 500) + '...' : 'Không có thông tin.';
 
       const embed = new MessageEmbed()
-        .setTitle(lnData.title.romaji)
-        .setURL(lnData.siteUrl)
+        .setTitle(MangaData.title.romaji)
+        .setURL(MangaData.siteUrl)
         .setDescription(description)
         .addFields(
           {
              name: 'Số chương', 
-             value: lnData.chapters ? ln.chapters : 'Không xác định', 
+             value: MangaData.chapters ? Manga.chapters : 'Không xác định', 
              inline: true 
           },
           {
              name: 'Thể loại', 
-             value: lnData.genres.join(', '), 
+             value: MangaData.genres.join(', '), 
              inline: true 
           },
           {
              name: 'Xếp hạng',
-             value: `${lnData.averageScore}/100`, 
+             value: `${MangaData.averageScore}/100`, 
              inline: true 
           },
           {
              name: 'Đánh giá', 
-             value: `${lnData.meanScore ? lnData.meanScore + '/100' : 'Không có'}`, 
+             value: `${MangaData.meanScore ? MangaData.meanScore + '/100' : 'Không có'}`, 
              inline: true 
           },
         )
-        .setImage(lnData.coverImage.large)
+        .setImage(MangaData.coverImage.large)
         .setTimestamp();
 
       interaction.reply({ embeds: [embed] });

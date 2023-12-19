@@ -47,26 +47,34 @@ module.exports = {
                   }
                 }
               }
+              genres
             }
           }
         `,
         variables: { name: animeName },
       });
-
+    
       const animeData = response.data.data.Media;
-
+    
       if (!animeData) {
-        console.log(`Không tìm thấy anime: ${animeName}`);
+      //  //console.log(`Không tìm thấy anime: ${animeName}`);
         return interaction.reply(`Không tìm thấy anime: **${animeName}**`);
       }
-
-      console.log(`Thông tin anime: ${JSON.stringify(animeData)}`);
-
+    
+    //  //console.log(`Thông tin anime: ${JSON.stringify(animeData)}`);
+    
+      // Check if the anime contains ecchi or hentai genres
+      const genres = animeData.genres;
+      if (genres.includes('Ecchi') || genres.includes('Hentai')) {
+        //console.log(`Blocked anime: ${animeName}`);
+        return interaction.reply(`**AniChan đã chặn kết quả tìm kiếm anime: ${animeName}**\n__Lý do:__ Để bảo vệ máy chủ của bạn khỏi điều khoản dịch vụ của Discord, AniChan chặn các kết quả tìm kiếm chứa nội dung người lớn.`);
+      }
+    
       let description = animeData.description;
       if (description && description.length > 400) {
         description = description.slice(0, 400) + '...';
       }
-
+    
       const embed = new MessageEmbed()
         .setTitle(animeData.title.romaji)
         .setURL(animeData.siteUrl)
@@ -106,7 +114,7 @@ module.exports = {
         )
         .setImage(animeData.coverImage.large)
         .setTimestamp();
-
+    
       interaction.reply({ embeds: [embed] });
     } catch (error) {
       console.error('Lỗi khi tìm kiếm anime:', error);
