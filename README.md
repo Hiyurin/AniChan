@@ -4,8 +4,12 @@ AniChan is a bot for browsing AniList from within Discord using JavaScript. You 
 
 ## Install
 
-**__Requirements__**: [Discord.js v13](https://www.npmjs.com/package/discord.js/v/13.16.0) & nodejs ≥ [16.20.2](https://nodejs.org/download/release/v16.20.2/) ≤ [19.9.0](https://nodejs.org/download/release/v19.9.0/) (Recommend [nodejs 18](https://nodejs.org/download/release/latest-hydrogen/)) 
+### Requirements: 
+- [Discord.js v13](https://www.npmjs.com/package/discord.js/v/13.16.0) 
+- Nodejs ≥  (Recommend [Nodejs 18](https://nodejs.org/download/release/latest-hydrogen/)) 
+- Nodejs not lower than version [16.9.0](https://nodejs.org/download/release/v16.9.0/) and greater than version [19.9.0](https://nodejs.org/download/release/v19.9.0/) 
 
+### Install
 - Clone the repository: `git clone https://github.com/Hiyurin/AniChan.git`
 - Install the library: `npm i`
 - Edit the variables in the `.env` file
@@ -25,7 +29,7 @@ AniChan is a bot for browsing AniList from within Discord using JavaScript. You 
 - `/user`: Get AniList user stats
 - `/manga`: Search for manga
 - `/anime`: Search for anime
-- `/find`: Search for the names of anime with the appearance of a certain character
+- `/charactertoanime`: Search for the names of anime with the appearance of a certain character
 - `/character`: Get information about anime characters
 - `/trending`: Show trending anime
 - `/studio`: Get information about a studio
@@ -33,10 +37,11 @@ AniChan is a bot for browsing AniList from within Discord using JavaScript. You 
 
 ### Honkai StarRail Commands
 - `/hsrcharacters`: Get Honkai Star Rail character list.
+
 ### Other Commands
 - `/ping`: Get bot ping.
-- `avatar`: Get user avatar.
-- `ascii`: Convert text to AscII code.
+- `/avatar`: Get user avatar.
+- `/ascii`: Convert text to AscII code.
 
 
 ## Issues 
