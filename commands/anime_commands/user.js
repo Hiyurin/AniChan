@@ -43,12 +43,8 @@ module.exports = {
       const userData = response.data.data.User;
 
       if (!userData) {
-        console.log(`Không tìm thấy thông tin người dùng: ${username}`);
         return interaction.reply(`Không tìm thấy thông tin người dùng: **${username}**`);
       }
-
-      console.log(`Thông tin người dùng: ${JSON.stringify(userData)}`);
-
       const embed = new MessageEmbed()
         .setTitle(userData.name)
         .setURL(userData.siteUrl)

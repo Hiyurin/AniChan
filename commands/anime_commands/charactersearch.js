@@ -4,7 +4,7 @@ const axios = require('axios');
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('find')
+    .setName('charactersearch')
     .setDescription('Tìm kiếm các bộ anime có chứa tên nhân vật.')
     .addStringOption(option => option.setName('character').setDescription('Tên nhân vật cần tìm').setRequired(true)),
   async execute(interaction) {
@@ -29,6 +29,7 @@ module.exports = {
                   }
                 }
               }
+              genres
             }
           }
         `,
@@ -38,11 +39,8 @@ module.exports = {
       const characterData = response.data.data.Character;
 
       if (!characterData) {
-        console.log(`Không tìm thấy nhân vật: ${character}`);
         return interaction.reply(`Không tìm thấy nhân vật: **${character}**`);
       }
-
-      console.log(`Thông tin nhân vật: ${JSON.stringify(characterData)}`);
 
       const embed = new MessageEmbed()
         .setTitle(`Các bộ anime có nhân vật: ${characterData.name.full}`)
@@ -51,7 +49,7 @@ module.exports = {
 
       characterData.media.nodes.forEach(anime => {
         const animeTitle = anime.title.romaji || 'Không có thông tin.';
-        embed.addField(animeTitle, '\u200B', false);
+        embed.addFields({ name: animeTitle, value: '\u200B', inline: false });
       });
 
       interaction.reply({ embeds: [embed] });

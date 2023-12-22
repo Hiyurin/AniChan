@@ -57,16 +57,12 @@ module.exports = {
       const animeData = response.data.data.Media;
     
       if (!animeData) {
-      //  //console.log(`Không tìm thấy anime: ${animeName}`);
         return interaction.reply(`Không tìm thấy anime: **${animeName}**`);
       }
-    
-    //  //console.log(`Thông tin anime: ${JSON.stringify(animeData)}`);
-    
-      // Check if the anime contains ecchi or hentai genres
+
       const genres = animeData.genres;
       if (genres.includes('Ecchi') || genres.includes('Hentai')) {
-        //console.log(`Blocked anime: ${animeName}`);
+
         return interaction.reply(`**AniChan đã chặn kết quả tìm kiếm anime: ${animeName}**\n__Lý do:__ Để bảo vệ máy chủ của bạn khỏi điều khoản dịch vụ của Discord, AniChan chặn các kết quả tìm kiếm chứa nội dung người lớn.`);
       }
     
@@ -81,36 +77,12 @@ module.exports = {
         .setDescription(description)
         .setColor('#66FFFF')
         .addFields(
-          {
-            name: 'Số tập',
-            value: `${animeData.episodes || 'N/A'}`,
-            inline: true,
-          },
-          {
-            name: 'Trạng thái',
-            value: `${animeData.status}`,
-            inline: true,
-          },
-          {
-            name: 'Đánh giá',
-            value: `${animeData.averageScore}/100`,
-            inline: true,
-          },
-          {
-            name: 'Xếp hạng',
-            value: `${animeData.meanScore}/100`,
-            inline: true,
-          },
-          {
-            name: 'Mùa',
-            value: `${animeData.season} - ${animeData.startDate.year}`,
-            inline: true,
-          },
-          {
-            name: 'Studio',
-            value: `${animeData.studios.edges.map(edge => edge.node.name).join(', ')}`,
-            inline: true,
-          }
+          { name: 'Số tập',          value: `${animeData.episodes || 'N/A'}`,                                    inline: true, },
+          { name: 'Trạng thái',      value: `${animeData.status}`,                                               inline: true, },
+          { name: 'Đánh giá',        value: `${animeData.averageScore}/100`,                                     inline: true, },
+          { name: 'Xếp hạng',        value: `${animeData.meanScore}/100`,                                        inline: true, },
+          { name: 'Mùa',             value: `${animeData.season} - ${animeData.startDate.year}`,                 inline: true, },
+          { name: 'Studio',          value: `${animeData.studios.edges.map(edge => edge.node.name).join(', ')}`, inline: true, }
         )
         .setImage(animeData.coverImage.large)
         .setTimestamp();

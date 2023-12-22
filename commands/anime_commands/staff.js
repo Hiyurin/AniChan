@@ -36,15 +36,11 @@ module.exports = {
             const staffData = response.data.data.Staff;
 
             if (!staffData) {
-                console.log(`Không tìm thấy thông tin staff: ${staffName}`);
                 return interaction.reply(`Không tìm thấy thông tin staff: **${staffName}**`);
             }
 
-            console.log(`Thông tin staff: ${JSON.stringify(staffData)}`);
-
             const embed = new MessageEmbed()
                 .setTitle(`Thông tin cá nhân của staff: ${staffData.name.first} ${staffData.name.last}`)
-
                 .setURL(staffData.siteUrl)
                 .setDescription(staffData.description || 'Không có thông tin.')
                 .setImage(staffData.image.large)

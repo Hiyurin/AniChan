@@ -27,6 +27,7 @@ AniChan is a bot for browsing AniList from within Discord using JavaScript. You 
 ## Commands
 ### Anime Commands
 - `/user`: Get AniList user stats
+- `/search`: Search for anime names using links to images
 - `/manga`: Search for manga
 - `/anime`: Search for anime
 - `/charactertoanime`: Search for the names of anime with the appearance of a certain character

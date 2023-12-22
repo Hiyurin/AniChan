@@ -45,17 +45,11 @@ module.exports = {
       const MangaData = response.data.data.Media;
 
       if (!MangaData) {
-        //console.log(`Không tìm thấy manga: ${MangaName}`);
         return interaction.reply(`Không tìm thấy manga: **${MangaName}**`);
       }
 
-      //console.log(`Thông tin về manga: ${JSON.stringify(MangaData)}`);
-
-      // Check if the manga is ecchi or hentai
-
       const MangaGenre = MangaData.genres;
       if (MangaGenre.includes('Ecchi') || MangaGenre.includes('Hentai')) {
-       // //console.log(`Blocked Result: ${MangaName}`); 
        return interaction.reply(`**AniChan đã chặn kết quả tìm kiếm manga: ${MangaName}**\n__Lý do:__ Để bảo vệ máy chủ của bạn khỏi điều khoản dịch vụ của Discord, AniChan chặn các kết quả tìm kiếm chứa nội dung người lớn.`);
       }
 

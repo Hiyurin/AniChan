@@ -1,6 +1,6 @@
 {
   "name": "anichan",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,18 +14,13 @@
     "@discordjs/builders": "^1.6.3",
     "@discordjs/opus": "^0.9.0",
     "@discordjs/rest": "^1.7.1",
-    "@google-cloud/translate": "^8.0.2",
     "axios": "^1.4.0",
     "discord-api-types": "^0.37.50",
     "discord.js": "^13.16.0",
     "dotenv": "^16.3.1",
     "enkanetwork.js": "^2.6.0",
     "figlet": "^1.7.0",
-    "mysql2": "^3.6.5",
-    "quick.db": "^9.1.7",
     "starrail.js": "^1.2.0",
-    "weather-js": "^2.0.0",
-    "xlsx": "^0.18.5",
-    "yarn": "^1.22.21"
+    "weather-js": "^2.0.0"
   }
 }

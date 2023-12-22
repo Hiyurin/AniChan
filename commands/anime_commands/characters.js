@@ -30,6 +30,7 @@ module.exports = {
                 }
               }
             }
+            genres
           }
         }
       `;
@@ -40,21 +41,17 @@ module.exports = {
       });
 
       const characterData = response.data.data.Character;
-
       if (!characterData) {
-        console.log(`Không tìm thấy thông tin nhân vật: ${characterName}`);
         return interaction.reply(`Không tìm thấy thông tin nhân vật: **${characterName}**`);
       }
-
-      console.log(`Thông tin nhân vật: ${JSON.stringify(characterData)}`);
 
       let description = characterData.description || 'Không có mô tả.';
 
       const embed = new MessageEmbed()
         .setTitle(characterData.name.full)
         .setURL(characterData.siteUrl)
-        .setDescription(characterData.description)
-        .addField('Các tác phẩm tham gia', characterData.media.nodes.map(node => node.title.romaji).join(', ') || 'Không có tác phẩm nào.')
+        .setDescription(description)
+        .addFields({ name: 'Các tác phẩm tham gia', value: characterData.media.nodes.map(node => node.title.romaji).join(', ') || 'Không có tác phẩm nào.' })
         .setImage(characterData.image.large)
         .setColor('#C6FFFF')
         .setTimestamp();

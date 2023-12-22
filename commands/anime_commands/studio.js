@@ -41,11 +41,8 @@ module.exports = {
             const studioData = response.data.data.Studio;
 
             if (!studioData) {
-                console.log(`Không tìm thấy thông tin studio: ${studioName}`);
                 return interaction.reply(`Không tìm thấy thông tin studio: **${studioName}**`);
             }
-
-            console.log(`Thông tin studio: ${JSON.stringify(studioData)}`);
 
             const animeList = studioData.media.nodes.map((anime, index) => {
                 const animeTitle = anime.title.romaji;
@@ -86,10 +83,10 @@ module.exports = {
                 return { embeds: [embed], components: [row] };
             };
 
-            const interactionReply = await interaction.reply(updateEmbed());
+            await interaction.reply(updateEmbed());
 
             const filter = i => i.customId === 'prev' || i.customId === 'next';
-            const collector = interaction.channel.createMessageComponentCollector({ filter, time: 30000 });
+            const collector = interaction.channel.createMessageComponentCollector({ filter, time: 60000 });
 
             collector.on('collect', async i => {
                 if (i.customId === 'prev' && currentPage > 0) {
@@ -100,7 +97,7 @@ module.exports = {
                 await interaction.editReply(updateEmbed());
             });
 
-            collector.on('end', collected => {
+            collector.on('end', () => {
                 interaction.editReply({ components: [] });
             });
         } catch (error) {

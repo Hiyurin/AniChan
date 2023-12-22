@@ -30,24 +30,16 @@ module.exports = {
       });
 
       const trendingAnime = response.data.data.Page.media;
-
-      console.log('Danh sách trending anime:', trendingAnime);
-
       const embed = new MessageEmbed()
         .setTitle('Danh sách 10 bộ anime đang thịnh hành trên AniList')
         .setDescription('Dưới đây là danh sách 10 bộ anime đang thịnh hành trên AniList:')
         .setTimestamp();
 
       trendingAnime.forEach(anime => {
-        const description = anime.description ? anime.description.slice(0, 1000) : 'Không có mô tả';
-
-        embed.addField(
-          anime.title.romaji,
-          `Xếp hạng: ${anime.averageScore}/100\nĐánh giá: ${anime.meanScore ? anime.meanScore + '/100' : 'Không có'}`,
-          false
+        const description = anime.description ? anime.description.replace(/<[^>]+>/g, '').slice(0, 250) + '...': 'Không có mô tả';
+        embed.addFields(
+          { name: anime.title.romaji, value: `__Mô tả:__ ${description}\n__Xếp hạng:__ ${anime.averageScore}/100\n__Đánh giá:__ ${anime.meanScore ? anime.meanScore + '/100' : 'Không có'}\n`, inline: false }
         );
-
-        //   embed.setImage();
       });
 
       interaction.reply({ embeds: [embed] });
