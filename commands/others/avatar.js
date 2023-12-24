@@ -20,7 +20,7 @@ module.exports = {
             .setURL(avatar)
             .setImage(avatar)
             .setFooter({
-                text: `Request by ${interaction.user.username}`,
+                text: `Yêu cầu bởi ${interaction.user.username}`,
                 iconURL: interaction.user.displayAvatarURL({ format: 'png', dynamic: true, size: 1024 })
             })
             .setColor('#eb3434');

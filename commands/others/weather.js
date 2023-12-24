@@ -6,7 +6,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('weather')
         .setDescription('Kiểm tra dự báo thời tiết cho một địa điểm nhất định')
-        .addStringOption(option => option.setName("city").setDescription("The city you want to check the weather for").setRequired(true)),
+        .addStringOption(option => option.setName("city").setDescription("Tên thành phố bạn muốn xem thông tin.").setRequired(true)),
 
     async execute(interaction) {
         const city = interaction.options.getString('city');

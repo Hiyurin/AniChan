@@ -1,3 +1,4 @@
+const fs = require('fs');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MessageEmbed } = require('discord.js');
 const axios = require('axios');
@@ -28,11 +29,31 @@ module.exports = {
             if (currentTime - lastUsage < cooldownTime) {
                 const remainingTime = cooldownTime - (currentTime - lastUsage);
                 const remainingMinutes = Math.ceil(remainingTime / (60 * 1000));
-                return interaction.reply(`Vì bị giới hạn yêu cầu đến máy chủ trace.moe, bạn chỉ có thể sử dụng lệnh này mỗi 60 phút một lần. Vui lòng thử lại sau ${remainingMinutes} phút.`);
+                return interaction.reply(`Vì bị giới hạn yêu cầu api đến máy chủ trace.moe, bạn chỉ có thể sử dụng lệnh này mỗi 60 phút một lần.\nVui lòng thử lại sau ${remainingMinutes} phút hoặc bạn có thể sử dụng trực tiếp trên máy chủ [trace.moe](https://trace.moe/).`);
             }
         }
 
         try {
+            const adminIDs = fs.readFileSync('./adminID.txt', 'utf8').split(',');
+            const isAdmin = adminIDs.includes(interaction.user.id);
+            let bypassLimit = false;
+
+            if (isAdmin) {
+                bypassLimit = true;
+            }
+
+            if (!bypassLimit) {
+                const lastUsage = commandCooldown.get(interaction.user.id);
+                const currentTime = Date.now();
+                const cooldownTime = 60 * 60 * 1000;
+
+                if (currentTime - lastUsage < cooldownTime) {
+                    const remainingTime = cooldownTime - (currentTime - lastUsage);
+                    const remainingMinutes = Math.ceil(remainingTime / (60 * 1000));
+                    return interaction.reply(`Vì bị giới hạn yêu cầu api đến máy chủ trace.moe, bạn chỉ có thể sử dụng lệnh này mỗi 60 phút một lần.\nVui lòng thử lại sau ${remainingMinutes} phút hoặc bạn có thể sử dụng trực tiếp trên máy chủ [trace.moe](https://trace.moe/).`);
+                }
+            }
+
             let apiUrl = 'https://api.trace.moe/search?url=' + encodeURIComponent(imageUrl);
             if (cutBorders) {
                 apiUrl = 'https://api.trace.moe/search?cutBorders&url=' + encodeURIComponent(imageUrl);
@@ -64,7 +85,7 @@ module.exports = {
                 }
                 const genres = response.data.data.Media.genres;
                 if (genres.includes('Ecchi') || genres.includes('Hentai')) {
-                    return interaction.reply(`**AniChan đã chặn kết quả tìm kiếm.**\n__Lý do:__ Để bảo vệ máy chủ của bạn khỏi điều khoản dịch vụ của Discord, AniChan chặn các kết quả tìm kiếm chứa nội dung người lớn.`);
+                    return interaction.reply(`**AniChan đã chặn kết quả tìm kiếm.**\n__Lý do:__ Để bảo vệ máy chủ của bạn khỏi điều khoản dịch vụ của Discord, AniChan chặn các kết quả tìm kiếm chứa nội dung ||ecchi, hentai||.`);
                 }
                 const episode = data.result[0].episode;
                 const similarity = data.result[0].similarity * 100;
