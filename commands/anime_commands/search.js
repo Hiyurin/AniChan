@@ -34,7 +34,7 @@ module.exports = {
         }
 
         try {
-            const adminIDs = fs.readFileSync('./adminID.txt', 'utf8').split(',');
+            const adminIDs = fs.readFileSync('./adminid.txt', 'utf8').split(',');
             const isAdmin = adminIDs.includes(interaction.user.id);
             let bypassLimit = false;
 
@@ -45,12 +45,12 @@ module.exports = {
             if (!bypassLimit) {
                 const lastUsage = commandCooldown.get(interaction.user.id);
                 const currentTime = Date.now();
-                const cooldownTime = 60 * 60 * 1000;
+                const cooldownTime = 10 * 60 * 1000;
 
                 if (currentTime - lastUsage < cooldownTime) {
                     const remainingTime = cooldownTime - (currentTime - lastUsage);
                     const remainingMinutes = Math.ceil(remainingTime / (60 * 1000));
-                    return interaction.reply(`Vì bị giới hạn yêu cầu api đến máy chủ trace.moe, bạn chỉ có thể sử dụng lệnh này mỗi 60 phút một lần.\nVui lòng thử lại sau ${remainingMinutes} phút hoặc bạn có thể sử dụng trực tiếp trên máy chủ [trace.moe](https://trace.moe/).`);
+                    return interaction.reply(`Vì bị giới hạn yêu cầu api đến máy chủ trace.moe, bạn chỉ có thể sử dụng lệnh này mỗi 10 phút một lần.\nVui lòng thử lại sau ${remainingMinutes} phút hoặc bạn có thể sử dụng trực tiếp trên máy chủ [trace.moe](https://trace.moe/).`);
                 }
             }
 
